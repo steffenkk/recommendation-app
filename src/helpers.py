@@ -3,9 +3,6 @@ from toolz import curry
 from yaml import safe_load
 
 
-# TODO: add make sure path exists
-
-
 def read_csv(file: str):
     return pd.read_csv(file, date_parser="%m/%d/%Y %H:%M", encoding="iso-8859-1")
 
