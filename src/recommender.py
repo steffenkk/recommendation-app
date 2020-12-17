@@ -14,7 +14,7 @@ from src.prepare import get_user_orders
 def generate_recommended_products(df: pd.DataFrame, user_orders: pd.DataFrame):
     """retrieve recommendations for the user's articles"""
     products = [
-        df.loc[ind].dropna().map(lambda x: x * user_orders[ind])
+        df.get(ind).dropna().map(lambda x: x * user_orders.loc[ind, :][0])
         for ind in user_orders.index
     ]
     return pd.concat(products).sort_values(ascending=False)
@@ -46,14 +46,15 @@ def process(
     item_field: str = "Description",
     number_options: int = 10,
 ):
-    similiar_items = read_csv("./data/sim_matrix.csv")
+    similiar_items = read_csv("../data/sim_matrix.csv")
     similiar_items.set_index(similiar_items.columns[0], inplace=True)
     return recommend(similiar_items, user_orders, item_field).head(number_options)
 
 
 if __name__ == "__main__":
-    uid = 689  # random.randint(0, 3800)
+    uid = 111  # random.randint(0, 3800)
     user_orders = get_user_orders(uid=uid, item_field="Description")
+    user_orders.to_json(f"./users/{uid}.json", force_ascii=False)
     print("\n--- The user ordered --- \n")
     print(user_orders.head(30))
     recommendation = process(user_orders)
