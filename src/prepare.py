@@ -1,6 +1,7 @@
 import pandas as pd
-from sklearn.metrics.pairwise import cosine_similarity
 from toolz import curry, pipe
+from sklearn.metrics.pairwise import cosine_similarity
+
 from src.helpers import read_csv, read_yaml, write_csv, pivot_products
 
 # FEATURE ENGINEERING
@@ -99,7 +100,7 @@ def prep_data(path: str):
     )
 
 
-def process(sim_measure: str, item_field: str):
+def process(sim_measure: str = "cosine", item_field: str = "Description"):
     df = prep_data("./data/OnlineRetail.csv")
     similiar_items = create_sim_matrix(df, sim_measure, item_field)
     write_csv("./data/sim_matrix.csv", similiar_items)
@@ -107,3 +108,6 @@ def process(sim_measure: str, item_field: str):
 
 if __name__ == "__main__":
     process(sim_measure="cosine", item_field="Description")
+    # uid = random.randint(0, 3800)
+    # user_orders = get_user_orders(uid=uid, item_field="Description")
+    # user_orders.to_json(f"./users/{uid}.json", force_ascii=False)
