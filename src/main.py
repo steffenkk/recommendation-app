@@ -1,27 +1,25 @@
 from typing import Optional, Dict
 from fastapi import FastAPI
+import time
+
 from src.user import User
+from src.cache import CachedData
+from src.recommender import Recommender
 
 app = FastAPI()
-
-
-@app.get("/")
-async def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/")
-async def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+data = CachedData(file_path="./data/sim_matrix.csv")
 
 
 @app.get("/recommendations/")
 def get_recommendation(user_id: int, orders: Optional[Dict[str, float]] = None):
+    start_time = time.time()
+
     user = User(id=user_id, orders=orders)
-    user.set_order_df()
-    recommendations = user.get_recommendation(number_ptions=5)
+    recommender = Recommender(data=data, user=user)
+
     return {
-        "user_id": user_id,
-        "past_orders": orders,
-        "recommendations": recommendations,
+        "user_id": user.id,
+        "past_orders": user.orders,
+        "recommendations": recommender.get_recommendation(number_options=5),
+        "exec_time": f"--- {(time.time() - start_time)} seconds ---",
     }
