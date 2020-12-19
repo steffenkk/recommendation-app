@@ -19,5 +19,10 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    entry_points={
+        "console_scripts": [
+            "prep = src.prepare:process",
+        ]
+    },
     python_requires=">=3.6",
 )
