@@ -1,8 +1,13 @@
 # recommendation-app
 A pure python collaborative filtering recommendation model to produce a product recommendation for an e-commerce shop. Service can be called via REST API and is deployed in a Docker container.   
 
-### Start the app in the project root 
- ```uvicorn main:app --app-dir ./src --port 8083 --reload```
+## Get up and running
+### Start the app in the project root (see prerequisites)
+ ```uvicorn main:app --app-dir ./src --host 0.0.0.0 --port 8083 --reload```
+
+ ### or, start in docker with no dependencies:
+
+ ```docker run -p 8083:8083 steffenkk/recommender-app:latest```
 ### request recommendations (examples)
 
 Fake a clients request to get a recommendation from the service:
