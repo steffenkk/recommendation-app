@@ -1,5 +1,6 @@
 from typing import Optional, Dict
 from fastapi import FastAPI
+from fastapi.openapi.utils import get_openapi
 import time
 
 from src.user import User
@@ -23,3 +24,19 @@ def get_recommendation(user_id: int, orders: Optional[Dict[str, float]] = None):
         "recommendations": recommender.get_recommendation(number_options=5),
         "exec_time": f"--- {(time.time() - start_time)} seconds ---",
     }
+
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    openapi_schema = get_openapi(
+        title="Service for product recommendations",
+        version="0.0.1",
+        description="Custom Open API Schema for the recommendation app",
+        routes=app.routes,
+    )
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+
+app.openapi = custom_openapi
