@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from pydantic import BaseModel
 
 from typing import Dict
@@ -23,11 +24,21 @@ class Recommender(BaseModel):
     def _set_recommender_df(self):
         """retrieve recommendations for the user's articles"""
         sim_matrix = self.data.get_sim_matrix()
+        arrs = {
+            self.user.orderDF.index[i]: [
+                np.array(
+                    sim_matrix.get(self.user.orderDF.index[i]).dropna().index,
+                    dtype="object",
+                ),
+                np.array(sim_matrix.get(self.user.orderDF.index[i]).dropna()),
+            ]
+            for i in range(len(self.user.orderDF.index))
+        }
         products = [
-            sim_matrix.get(ind)
-            .dropna()
-            .map(lambda x: x * self.user.orderDF.loc[ind, :][0])
-            for ind in self.user.orderDF.index
+            pd.Series(
+                arrs[k][1] * self.user.orderDF.loc[k, :][0], index=arrs[k][0], name=k
+            )
+            for k, v in arrs.items()
         ]
         self.recommender_df = pd.concat(products).sort_values(ascending=False)
 
