@@ -1,7 +1,6 @@
 from typing import Optional, Dict
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
-import time
 
 from src.user import User
 from src.cache import CachedData
@@ -17,8 +16,6 @@ def get_recommendation(
     number_options: Optional[int] = 10,
     orders: Optional[Dict[str, float]] = None,
 ):
-    start_time = time.time()
-
     user = User(id=user_id, orders=orders)
     recommender = Recommender(data=data, user=user)
 
@@ -26,7 +23,6 @@ def get_recommendation(
         "user_id": user.id,
         "past_orders": user.orders,
         "recommendations": recommender.get_recommendation(number_options),
-        "exec_time": f"--- {(time.time() - start_time)} seconds ---",
     }
 
 
