@@ -1,6 +1,7 @@
 # own stuff
 .DS_Store
 data/
+evaluation-output.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
