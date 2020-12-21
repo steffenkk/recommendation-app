@@ -82,10 +82,11 @@ def pocess(similiarity_measure: str, number_options: int, min_orders: int, **kwa
     :param min_orders: only recommend if this minimum of past orders is provided
     """
     df_train, df_test = split_data(
-        df=prep_data("../data/OnlineRetail.csv"), ith_perc=0.8, date_field="InvoiceDate"
+        df=prep_data("./data/OnlineRetail.csv"), ith_perc=0.8, date_field="InvoiceDate"
     )
     sim_matrix = train(df_train, sim_measure=similiarity_measure, **kwargs)
     test_users = get_test_users(df_train, df_test, "CustomerID")
+
     results = []
     for test_user in test_users:
         test_user_orders = extract_model_input(df_train, user_id=test_user)
@@ -98,12 +99,13 @@ def pocess(similiarity_measure: str, number_options: int, min_orders: int, **kwa
             )
             if len(recommendations.keys()) > 0:
                 results.append(test(test_user, df_test, recommendations))
+
     result_df = pd.DataFrame(columns=["precision", "recall"], data=results)
     avg_precision = result_df.precision.mean()
     avg_recall = result_df.recall.mean()
-    print("\n")
+
     print(
-        f"Model Parameters are similiarity_measure: {similiarity_measure}, "
+        f"\n Model Parameters are similiarity_measure: {similiarity_measure}, "
         + f"number_options: {str(number_options)}, min_orders: {str(min_orders)}"
     )
     print("AVG: Precision is: " + str(round(avg_precision, 3)))
@@ -115,24 +117,24 @@ def pocess(similiarity_measure: str, number_options: int, min_orders: int, **kwa
 # %%
 
 # this can take ver long!
-measures = ["correlation", "cosine"]
-numbers_options = [5, 10]
-min_orders = [3, 6]
-min_periods = [20, 40]
-methods = ["pearson", "spearman"]
-for measure in measures:
-    for number_options in numbers_options:
-        for min_order in min_orders:
-            if measure == "correlation":
-                for min_period in min_periods:
-                    for mehtod in methods:
-                        pocess(
-                            measure,
-                            number_options,
-                            min_order,
-                            min_periods=min_period,
-                            method=mehtod,
-                        )
-            else:
-                pocess(measure, number_options, min_order)
-# %%
+if __name__ == "__main__":
+    measures = ["correlation", "cosine"]
+    numbers_options = [5, 10]
+    min_orders = [3, 6]
+    min_periods = [20, 40]
+    methods = ["pearson", "spearman"]
+    for measure in measures:
+        for number_options in numbers_options:
+            for min_order in min_orders:
+                if measure == "correlation":
+                    for min_period in min_periods:
+                        for mehtod in methods:
+                            pocess(
+                                measure,
+                                number_options,
+                                min_order,
+                                min_periods=min_period,
+                                method=mehtod,
+                            )
+                else:
+                    pocess(measure, number_options, min_order)
