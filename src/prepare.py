@@ -12,19 +12,22 @@ def keep_country(country: str, df: pd.DataFrame):
     return df[df["Country"] == country]
 
 
-def create_sim_matrix(df: pd.DataFrame, similiarity_measure: str, item_field: str):
+def create_sim_matrix(
+    df: pd.DataFrame, similiarity_measure: str, item_field: str, **kwargs
+):
     """
     :info: create a matrix where all product vectors are compared with the
            provided similiarity_measure
     :param similiarity_measure: string, one of 'correlation' or 'cosine'
+    :param kwargs: if 'correlation' you cann pass params like method or min_periods
+           and method (see pandas df.corr mehtod).
+           Will be ignored when 'cosine' is specified
     """
     if similiarity_measure == "correlation":
         crosstab = pivot_products(
             ["CustomerID"], [item_field], ["InvoiceNo"], "count", df
         )
-        sim_matrix = create_corr_matrix(
-            crosstab, min_periods=20, method="pearson"
-        ).round(4)
+        sim_matrix = create_corr_matrix(crosstab, **kwargs).round(4)
 
     elif similiarity_measure == "cosine":
         crosstab = pivot_products(
