@@ -21,7 +21,7 @@ def create_sim_matrix(
     :param similiarity_measure: string, one of 'correlation' or 'cosine'
     :param kwargs: if 'correlation' you cann pass params like method or min_periods
            and method (see pandas df.corr mehtod).
-           Will be ignored when 'cosine' is specified
+           KWARGS will be ignored when 'cosine' is specified.
     """
     if similiarity_measure == "correlation":
         crosstab = pivot_products(
@@ -103,14 +103,16 @@ def prep_data(path: str):
     )
 
 
-def process(sim_measure: str = "cosine", item_field: str = "Description"):
+def process(sim_measure: str = "cosine", item_field: str = "Description", **kwargs):
     df = prep_data("./data/OnlineRetail.csv")
-    similiar_items = create_sim_matrix(df, sim_measure, item_field)
+    similiar_items = create_sim_matrix(df, sim_measure, item_field, **kwargs)
     write_csv("./data/sim_matrix.csv", similiar_items)
 
 
 if __name__ == "__main__":
-    process(sim_measure="cosine", item_field="Description")
-    # uid = random.randint(0, 3800)
-    # user_orders = get_user_orders(uid=uid, item_field="Description")
-    # user_orders.to_json(f"./users/{uid}.json", force_ascii=False)
+    process(
+        sim_measure="correlation",
+        item_field="Description",
+        min_periods=40,
+        method="spearman",
+    )
