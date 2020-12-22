@@ -11,3 +11,9 @@ class User:
         self.id = id
         self.orders = orders
         self.orderDF = DataFrame(index=orders.keys(), data=orders.values())
+
+    def get_id(self):
+        return self.id
+
+    def get_orders(self):
+        return self.orders
