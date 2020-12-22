@@ -1,9 +1,19 @@
 import pytest
+import pandas as pd
 from numpy import array, dot
 from numpy.linalg import norm
-import pandas as pd
-from src.prepare import create_cosine_matrix
-from src.helpers import pivot_products, read_csv
+
+
+from src.prepare import (
+    create_cosine_matrix,
+    create_corr_matrix,
+    keep_country,
+    remove_administrative_products,
+    remove_zeroprice_products,
+    remove_giftcards,
+    prep_data,
+)
+from src.helpers import pivot_products, read_csv, read_yaml
 
 
 @pytest.fixture
@@ -36,8 +46,71 @@ def test_cosine_sim(df_generation):
 
     expected_sample = manual_cosine_df.iloc[:, 0].astype("float64").round(3)
 
-    print(result_sample[result_sample == expected_sample])
-
     assert result_sample.equals(
         expected_sample
     ), "The cosine similiarity is implemented incorrectly."
+
+
+def test_correlation(df_generation):
+    crosstab = pivot_products(
+        ["CustomerID"], ["Description"], ["InvoiceNo"], "count", pytest.DF
+    )
+    result = (
+        create_corr_matrix(crosstab, min_periods=40, method="pearson")[
+            "ZINC T-LIGHT HOLDER STARS SMALL"
+        ]
+        .round(3)
+        .dropna()
+    )
+
+    def get_pearson_corr(x: pd.Series, y: pd.Series):
+        return x.corr(y, min_periods=40, method="pearson")
+
+    crosstab.columns = crosstab.columns.droplevel(0)
+    manual_corr_df = pd.DataFrame(
+        index=list(crosstab.columns),
+        columns=list(crosstab.columns),
+    )
+
+    t_col = "ZINC T-LIGHT HOLDER STARS SMALL"
+    for col in manual_corr_df.index:
+        manual_corr_df.loc[col, t_col] = get_pearson_corr(
+            crosstab.loc[:, t_col], crosstab.loc[:, col]
+        )
+
+    expected = manual_corr_df[t_col].astype("float64").round(3).dropna()
+    assert result.equals(expected)
+
+
+def test_keep_country(df_generation):
+    result = keep_country("United Kingdom", pytest.DF)
+    assert result["Country"].all() == "United Kingdom"
+
+
+def test_remove_administrative_products(df_generation):
+    admin_products = read_yaml("./conf/meta.yaml")["admin_products"]
+    result = remove_administrative_products(admin_products, pytest.DF)
+    assert len(result["Description"].isin(admin_products).index) > 0
+
+
+def test_remove_zeroprice_products(df_generation):
+    result = remove_zeroprice_products(pytest.DF)
+    assert (result["UnitPrice"] <= 0.05).any()
+
+
+def test_prep_data(df_generation):
+    path = "./data/OnlineRetail.csv"
+    result = prep_data(path)
+    df = read_csv(path)
+    df = keep_country("United Kingdom", df)
+    df = remove_giftcards(df)
+    df = remove_zeroprice_products(df)
+    df = remove_administrative_products(
+        read_yaml("./conf/meta.yaml")["admin_products"], df
+    )
+    assert result.equals(df)
+
+
+def test_remove_giftcards(df_generation):
+    result = remove_giftcards(pytest.DF)
+    assert (~result["StockCode"].map(lambda x: str(x).startswith("gift"))).any()
