@@ -20,8 +20,8 @@ def get_recommendation(
     recommender = Recommender(data=data, user=user)
 
     return {
-        "user_id": user.id,
-        "past_orders": user.orders,
+        "user_id": user.get_id(),
+        "past_orders": user.get_orders(),
         "recommendations": recommender.get_recommendation(number_options),
     }
 
