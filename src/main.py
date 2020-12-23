@@ -10,7 +10,7 @@ app = FastAPI()
 data = CachedData(file_path="./data/sim_matrix.csv")
 
 
-@app.get("/recommendations/")
+@app.post("/recommendations/")
 def get_recommendation(
     user_id: int,
     number_options: Optional[int] = 10,
