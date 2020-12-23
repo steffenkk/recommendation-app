@@ -65,10 +65,6 @@ def calc_recall(y_true: np.array, y_pred: np.array):
     return len(np.intersect1d(y_true, y_pred)) / len(y_true)
 
 
-def calc_f_score(recall: float, precision: float):
-    return 2 * precision * recall / (precision + recall)
-
-
 # %%
 # create similarity matrix from train data set and model input
 # (train dataset because we give the past orders as input)
@@ -110,7 +106,6 @@ def pocess(similiarity_measure: str, number_options: int, min_orders: int, **kwa
     )
     print("AVG: Precision is: " + str(round(avg_precision, 3)))
     print("AVG: Recall is: " + str(round(avg_recall, 3)))
-    print("AVG: F-Score is: " + str(round(calc_f_score(avg_recall, avg_precision), 3)))
     print(f"Test results for {str(len(results))} predictions")
 
 
