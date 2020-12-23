@@ -13,7 +13,7 @@ data = CachedData(file_path="./data/sim_matrix.csv")
 @app.post("/recommendations/")
 def get_recommendation(
     user_id: int,
-    number_options: Optional[int] = 10,
+    number_options: Optional[int] = 5,
     orders: Optional[Dict[str, float]] = None,
 ):
     user = User(id=user_id, orders=orders)
