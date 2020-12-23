@@ -111,8 +111,6 @@ def process(sim_measure: str = "cosine", item_field: str = "Description", **kwar
 
 if __name__ == "__main__":
     process(
-        sim_measure="correlation",
+        sim_measure="cosine",
         item_field="Description",
-        min_periods=40,
-        method="spearman",
     )
