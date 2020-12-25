@@ -8,12 +8,12 @@ class User:
         use the orders List to create a DF
         the DF then is used to retrive recommendations
         """
-        self.id = id
-        self.orders = orders
+        self._id = id
+        self._orders = orders
         self.orderDF = DataFrame(index=orders.keys(), data=orders.values())
 
     def get_id(self):
-        return self.id
+        return self._id
 
     def get_orders(self):
-        return self.orders
+        return self._orders
