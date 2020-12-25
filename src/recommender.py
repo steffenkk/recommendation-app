@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-from pydantic import BaseModel
-
 from typing import Dict
 
 from src.cache import CachedData
@@ -10,16 +8,18 @@ from src.user import User
 # Actual Recommendation
 
 
-class Recommender(BaseModel):
-    data: CachedData
-    user: User
-    recommender_df: pd.DataFrame = None
-    recommended_products: Dict = None
-
-    class Config:
-        """ whether or not to allow custom types """
-
-        arbitrary_types_allowed = True
+class Recommender:
+    def __init__(
+        self,
+        data: CachedData,
+        user: User,
+        recommender_df: pd.DataFrame = None,
+        recommended_products: Dict[str, int] = None,
+    ):
+        self.data = data
+        self.user = user
+        self.recommender_df = recommender_df
+        self.recommended_products = recommended_products
 
     def _set_recommender_df(self):
         """retrieve recommendations for the user's articles"""
