@@ -44,6 +44,6 @@ This will split the data set into train (80 %) and test (20 %), run the Item to 
 
 ## Whats happening behind the scenes:
 
-checkout the sequence diagram:
+checkout the diagrams in the docs. For instance uml sequence at API Call:
 
-![](https://github.com/steffenkk/recommendation-app/blob/main/docs/Sequence.jpg?raw=true)
+![](https://github.com/steffenkk/recommendation-app/blob/main/docs/Sequence.png?raw=true)
