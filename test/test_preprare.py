@@ -55,10 +55,9 @@ def test_correlation(df_generation):
     crosstab = pivot_products(
         ["CustomerID"], ["Description"], ["InvoiceNo"], "count", pytest.DF
     )
+    t_col = "ZINC T-LIGHT HOLDER STARS SMALL"
     result = (
-        create_corr_matrix(crosstab, min_periods=40, method="pearson")[
-            "ZINC T-LIGHT HOLDER STARS SMALL"
-        ]
+        create_corr_matrix(crosstab, min_periods=40, method="pearson")[t_col]
         .round(3)
         .dropna()
     )
@@ -72,7 +71,6 @@ def test_correlation(df_generation):
         columns=list(crosstab.columns),
     )
 
-    t_col = "ZINC T-LIGHT HOLDER STARS SMALL"
     for col in manual_corr_df.index:
         manual_corr_df.loc[col, t_col] = get_pearson_corr(
             crosstab.loc[:, t_col], crosstab.loc[:, col]

@@ -1,10 +1,10 @@
+# prepare.py
+
 import pandas as pd
 from toolz import curry, pipe
 from sklearn.metrics.pairwise import cosine_similarity
 
 from src.helpers import read_csv, read_yaml, write_csv, pivot_products
-
-# FEATURE ENGINEERING
 
 
 @curry
