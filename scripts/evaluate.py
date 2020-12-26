@@ -1,11 +1,11 @@
-# %%
-import pandas as pd
+# evaluate.py
 import numpy as np
+import pandas as pd
 
-from src.prepare import prep_data, create_sim_matrix
 from src.user import User
-from src.recommender import Recommender
 from src.cache import CachedData
+from src.recommender import Recommender
+from src.prepare import prep_data, create_sim_matrix
 
 
 def split_data(df: pd.DataFrame, ith_perc: float, date_field: str):
@@ -26,7 +26,7 @@ def train(
 
 
 def get_test_users(df_train: pd.DataFrame, df_test: pd.DataFrame, id_field: str):
-    """ for the test, use only customers that appear in both"""
+    """ for the test, use only customers that appear in both datasets"""
     return (
         df_train[df_train[id_field].isin(df_test[id_field])][id_field].dropna().unique()
     )
@@ -65,12 +65,7 @@ def calc_recall(y_true: np.array, y_pred: np.array):
     return len(np.intersect1d(y_true, y_pred)) / len(y_true)
 
 
-# %%
-# create similarity matrix from train data set and model input
-# (train dataset because we give the past orders as input)
-
-
-def pocess(similiarity_measure: str, number_options: int, min_orders: int, **kwargs):
+def process(similiarity_measure: str, number_options: int, min_orders: int, **kwargs):
     """
     run the evaluation process with different parameters
     :param similiarity_measure: string, one of 'correlation' or 'cosine'
@@ -109,9 +104,7 @@ def pocess(similiarity_measure: str, number_options: int, min_orders: int, **kwa
     print(f"Test results for {str(len(results))} predictions")
 
 
-# %%
-
-# this can take ver long!
+# ATTENTION: this can take very long!
 if __name__ == "__main__":
     measures = ["correlation", "cosine"]
     numbers_options = [5, 10]
@@ -124,7 +117,7 @@ if __name__ == "__main__":
                 if measure == "correlation":
                     for min_period in min_periods:
                         for mehtod in methods:
-                            pocess(
+                            process(
                                 measure,
                                 number_options,
                                 min_order,
@@ -132,4 +125,4 @@ if __name__ == "__main__":
                                 method=mehtod,
                             )
                 else:
-                    pocess(measure, number_options, min_order)
+                    process(measure, number_options, min_order)
