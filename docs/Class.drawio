@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-12-25T16:23:16.143Z" agent="5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="lmuQeivzllNbZqrqxY36" version="14.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-28T11:20:18.163Z" agent="5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="huVX0fSY4ApkawEABYJA" version="14.1.1" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="946" dy="532" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1426" dy="769" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -17,21 +17,21 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--0" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;shadow=0;strokeWidth=1;strokeColor=#666666;fontColor=#333333;fontSize=13;fillColor=#CCCCCC;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="213" y="130" width="210" height="190" as="geometry">
+          <mxGeometry x="218" y="58" width="210" height="251" as="geometry">
             <mxRectangle x="213" y="130" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--1" value="- _id: int&#xa;- _orders: Dict[str, int]&#xa;+ orderDF: DataFrame" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--1" value="+ id: int&#xa;+ past_orders: Dict[str, int]&#xa;+ recommendations: Dict[str, float]" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
           <mxGeometry y="26" width="210" height="64" as="geometry" />
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--4" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
           <mxGeometry y="90" width="210" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--5" value="- __init__ (id: int, orders: &#xa;        Dict[str, int])&#xa;+ get_id(): int&#xa;+ get_orders(): Dict[str, int]" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
-          <mxGeometry y="98" width="210" height="78" as="geometry" />
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--5" value="- __init__ (id: int, past_orders: &#xa;        Dict[str, int])&#xa;+ set_recommendations(&#xa;        recommendations: &#xa;        Dict[str, float]): int): None&#xa;+ get_id(): int&#xa;+ get_orders(): Dict[str, int]&#xa;+ get_recommendation(): &#xa;        Dict[str, float]" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+          <mxGeometry y="98" width="210" height="153" as="geometry" />
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--13" value="CachedData" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;shadow=0;strokeWidth=1;strokeColor=#666666;fontColor=#333333;fontSize=13;fillColor=#CCCCCC;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="213" y="340" width="210" height="160" as="geometry">
+          <mxGeometry x="218" y="339" width="210" height="160" as="geometry">
             <mxRectangle x="330" y="360" width="170" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -45,18 +45,18 @@
           <mxGeometry y="78" width="210" height="70" as="geometry" />
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--17" value="Recommender" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;shadow=0;strokeWidth=1;strokeColor=#666666;fontColor=#333333;fontSize=13;fillColor=#CCCCCC;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="480" y="180" width="270" height="290" as="geometry">
+          <mxGeometry x="480" y="126" width="270" height="318" as="geometry">
             <mxRectangle x="480" y="180" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--22" value="- _data: CachedData&#xa;- _user: User&#xa;- _recommender_df: DataFrame&#xa;- _recommended_products: Dict" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;shadow=0;html=0;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--17" vertex="1">
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--22" value="- _data: CachedData&#xa;- _user: User&#xa;- _orderDF: DataFrame&#xa;- _recommender_df: DataFrame&#xa;- _recommended_products: Dict" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;shadow=0;html=0;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--17" vertex="1">
           <mxGeometry y="26" width="270" height="84" as="geometry" />
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--23" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--17" vertex="1">
           <mxGeometry y="110" width="270" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--24" value="- __init__(data: CachedData, user: User, &#xa;       recommender_df: DataFrame, &#xa;       recommended_products: Dict[str, int]))&#xa;- _set_recommender_df(): None&#xa;- _set_recommended_products(&#xa;        number_options: int): None&#xa;- _remove_already_bought(): None&#xa;- _remove_duplicates(): None&#xa;+ get_recommendation(number_options&#xa;        : int): Dict[str, int]" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;spacingTop=1;spacing=2;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--17" vertex="1">
-          <mxGeometry y="118" width="270" height="172" as="geometry" />
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--24" value="- __init__(data: CachedData, user: User, &#xa;       recommender_df: DataFrame, &#xa;       recommended_products: Dict[str, int]))&#xa;- _set_recommender_df(): None&#xa;- _set_recommended_products(&#xa;        number_options: int): None&#xa;- _remove_already_bought(): None&#xa;- _remove_duplicates(): None&#xa;+ get_recommendation(number_options&#xa;        : int): Dict[str, int]&#xa;+ set_user_recommendation(&#xa;        number_options: int): None" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;spacingTop=1;spacing=2;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--17" vertex="1">
+          <mxGeometry y="118" width="270" height="200" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
