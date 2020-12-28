@@ -10,20 +10,17 @@ app = FastAPI()
 data = CachedData(file_path="./data/sim_matrix.csv")
 
 
-@app.post("/recommendations/")
+@app.post("/recommendations/", response_model=User)
 def get_recommendation(
     user_id: int,
+    orders: Dict[str, float],
     number_options: Optional[int] = 5,
-    orders: Optional[Dict[str, float]] = None,
 ):
-    user = User(id=user_id, orders=orders)
+    user = User(id=user_id, past_orders=orders)
     recommender = Recommender(data=data, user=user)
+    recommender.set_user_recommendation(number_options)
 
-    return {
-        "user_id": user.get_id(),
-        "past_orders": user.get_orders(),
-        "recommendations": recommender.get_recommendation(number_options),
-    }
+    return user
 
 
 def custom_openapi():

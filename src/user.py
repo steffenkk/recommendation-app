@@ -1,19 +1,20 @@
-from pandas import DataFrame
 from typing import Dict
+from pydantic import BaseModel
 
 
-class User:
-    def __init__(self, id: int, orders: Dict[str, int]):
-        """
-        use the orders List to create a DF
-        the DF then is used to retrive recommendations
-        """
-        self._id = id
-        self._orders = orders
-        self.orderDF = DataFrame(index=orders.keys(), data=orders.values())
+class User(BaseModel):
+    id: int
+    past_orders: Dict[str, int]
+    recommendations: Dict[str, float] = None
+
+    def set_recommendations(self, recommendations: Dict[str, float]):
+        self.recommendations = recommendations
 
     def get_id(self):
-        return self._id
+        return self.id
 
     def get_orders(self):
-        return self._orders
+        return self.past_orders
+
+    def get_recommendation(self):
+        return self.recommendations
