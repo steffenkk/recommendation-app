@@ -14,10 +14,13 @@ class Recommender:
         data: CachedData,
         user: User,
         recommender_df: pd.DataFrame = None,
-        recommended_products: Dict[str, int] = None,
+        recommended_products: Dict[str, float] = None,
     ):
         self._data = data
         self._user = user
+        self._orderDF = pd.DataFrame(
+            index=user.get_orders().keys(), data=user.get_orders().values()
+        )
         self._recommender_df = recommender_df
         self._recommended_products = recommended_products
 
@@ -25,19 +28,17 @@ class Recommender:
         """retrieve recommendations for the user's articles"""
         sim_matrix = self._data.get_sim_matrix()
         arrs = {
-            self._user.orderDF.index[i]: [
+            self._orderDF.index[i]: [
                 array(
-                    sim_matrix.get(self._user.orderDF.index[i]).dropna().index,
+                    sim_matrix.get(self._orderDF.index[i]).dropna().index,
                     dtype="object",
                 ),
-                array(sim_matrix.get(self._user.orderDF.index[i]).dropna()),
+                array(sim_matrix.get(self._orderDF.index[i]).dropna()),
             ]
-            for i in range(len(self._user.orderDF.index))
+            for i in range(len(self._orderDF.index))
         }
         products = [
-            pd.Series(
-                arrs[k][1] * self._user.orderDF.loc[k, :][0], index=arrs[k][0], name=k
-            )
+            pd.Series(arrs[k][1] * self._orderDF.loc[k, :][0], index=arrs[k][0], name=k)
             for k, v in arrs.items()
         ]
         self._recommender_df = pd.concat(products).sort_values(ascending=False)
@@ -51,7 +52,7 @@ class Recommender:
     def _remove_already_bought(self):
         """ avoid recommending already bought products """
         self._recommender_df = self._recommender_df.drop(
-            self._user.orderDF.index, axis=0, errors="ignore"
+            self._orderDF.index, axis=0, errors="ignore"
         )
 
     def _remove_duplicates(self):
@@ -61,7 +62,7 @@ class Recommender:
         )
 
     def get_recommendation(self, number_options: int):
-        """This function will be invoked by API Call"""
+        """process the manipulations and recommendation retrival"""
 
         if not self._recommender_df:
             self._set_recommender_df()
@@ -71,3 +72,7 @@ class Recommender:
         self._set_recommended_products(number_options=number_options)
 
         return self._recommended_products
+
+    def set_user_recommendation(self, number_options: int):
+        """ set recommendations to the associated user obejct"""
+        self._user.set_recommendations(self.get_recommendation(number_options))
