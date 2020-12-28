@@ -16,15 +16,15 @@ def order_generator():
 
 
 def test_get_recommendation(order_generator):
-    result = get_recommendation(user_id=12, number_options=10, orders=pytest.orders)
+    result = get_recommendation(user_id=12, number_options=5, orders=pytest.orders)
 
     data = CachedData(file_path="./data/sim_matrix.csv")
-    user = User(id=12, orders=pytest.orders)
+    user = User(id=12, past_orders=pytest.orders)
     recommender = Recommender(data=data, user=user)
 
     expected = {
-        "user_id": user.id,
-        "past_orders": user.orders,
-        "recommendations": recommender.get_recommendation(10),
+        "id": user.get_id(),
+        "past_orders": user.get_orders(),
+        "recommendations": recommender.get_recommendation(5),
     }
     assert result == expected
