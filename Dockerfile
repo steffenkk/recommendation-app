@@ -16,4 +16,4 @@ RUN prep
 
 EXPOSE 8083
 
-CMD uvicorn main:app --app-dir ./src --host 0.0.0.0 --port 8083 --reload
+CMD uvicorn main:app --app-dir ./src --host 0.0.0.0 --port 8083
