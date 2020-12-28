@@ -1,6 +1,5 @@
 import pandas as pd
 from numpy import array
-from typing import Dict
 
 from src.cache import CachedData
 from src.user import User
@@ -14,7 +13,6 @@ class Recommender:
         data: CachedData,
         user: User,
         recommender_df: pd.DataFrame = None,
-        recommended_products: Dict[str, float] = None,
     ):
         self._data = data
         self._user = user
@@ -22,7 +20,6 @@ class Recommender:
             index=user.get_orders().keys(), data=user.get_orders().values()
         )
         self._recommender_df = recommender_df
-        self._recommended_products = recommended_products
 
     def _set_recommender_df(self):
         """retrieve recommendations for the user's articles"""
@@ -43,11 +40,9 @@ class Recommender:
         ]
         self._recommender_df = pd.concat(products).sort_values(ascending=False)
 
-    def _set_recommended_products(self, number_options: int):
-        """set recommendet products as dict to be serializable"""
-        self._recommended_products = (
-            self._recommender_df.round(2).head(number_options).to_dict()
-        )
+    def _create_recommendation_dict(self, number_options: int):
+        """get recommended products as dict to be serialized"""
+        return self._recommender_df.round(2).head(number_options).to_dict()
 
     def _remove_already_bought(self):
         """ avoid recommending already bought products """
@@ -64,14 +59,11 @@ class Recommender:
     def get_recommendation(self, number_options: int):
         """process the manipulations and recommendation retrival"""
 
-        if not self._recommender_df:
-            self._set_recommender_df()
-
+        self._set_recommender_df()
         self._remove_already_bought()
         self._remove_duplicates()
-        self._set_recommended_products(number_options=number_options)
 
-        return self._recommended_products
+        return self._create_recommendation_dict(number_options=number_options)
 
     def set_user_recommendation(self, number_options: int):
         """ set recommendations to the associated user obejct"""
