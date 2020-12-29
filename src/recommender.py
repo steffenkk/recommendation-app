@@ -16,7 +16,7 @@ class Recommender:
     ):
         self._data = data
         self._user = user
-        self._orderDF = pd.DataFrame(
+        self._order_df = pd.DataFrame(
             index=user.get_orders().keys(), data=user.get_orders().values()
         )
         self._recommender_df = recommender_df
@@ -25,17 +25,19 @@ class Recommender:
         """retrieve recommendations for the user's articles"""
         sim_matrix = self._data.get_sim_matrix()
         arrs = {
-            self._orderDF.index[i]: [
+            self._order_df.index[i]: [
                 array(
-                    sim_matrix.get(self._orderDF.index[i]).dropna().index,
+                    sim_matrix.get(self._order_df.index[i]).dropna().index,
                     dtype="object",
                 ),
-                array(sim_matrix.get(self._orderDF.index[i]).dropna()),
+                array(sim_matrix.get(self._order_df.index[i]).dropna()),
             ]
-            for i in range(len(self._orderDF.index))
+            for i in range(len(self._order_df.index))
         }
         products = [
-            pd.Series(arrs[k][1] * self._orderDF.loc[k, :][0], index=arrs[k][0], name=k)
+            pd.Series(
+                arrs[k][1] * self._order_df.loc[k, :][0], index=arrs[k][0], name=k
+            )
             for k, v in arrs.items()
         ]
         self._recommender_df = pd.concat(products).sort_values(ascending=False)
@@ -47,7 +49,7 @@ class Recommender:
     def _remove_already_bought(self):
         """ avoid recommending already bought products """
         self._recommender_df = self._recommender_df.drop(
-            self._orderDF.index, axis=0, errors="ignore"
+            self._order_df.index, axis=0, errors="ignore"
         )
 
     def _remove_duplicates(self):
