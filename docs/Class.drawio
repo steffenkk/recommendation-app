@@ -1,13 +1,13 @@
-<mxfile host="app.diagrams.net" modified="2020-12-28T11:20:18.163Z" agent="5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="huVX0fSY4ApkawEABYJA" version="14.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-29T11:31:00.459Z" agent="5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="_uZVn7lDdh0P7EQw_dqI" version="14.1.1" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1426" dy="769" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="757" dy="530" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
-        <mxCell id="FY6bye2SpyNX19oZSb27-12" value="" style="endArrow=none;html=1;fontSize=13;entryX=0.013;entryY=-0.023;entryDx=0;entryDy=0;entryPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" target="zkfFHV4jXpPFQw0GAbJ--24" edge="1">
+        <mxCell id="FY6bye2SpyNX19oZSb27-12" value="" style="endArrow=none;html=1;fontSize=13;" parent="WIyWlLk6GJQsqaUBKTNV-1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="423" y="230" as="sourcePoint" />
-            <mxPoint x="473" y="180" as="targetPoint" />
+            <mxPoint x="423" y="222" as="sourcePoint" />
+            <mxPoint x="483" y="222" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="FY6bye2SpyNX19oZSb27-10" value="" style="endArrow=none;html=1;fontSize=13;" parent="WIyWlLk6GJQsqaUBKTNV-1" edge="1">
@@ -17,21 +17,21 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--0" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;shadow=0;strokeWidth=1;strokeColor=#666666;fontColor=#333333;fontSize=13;fillColor=#CCCCCC;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="218" y="58" width="210" height="251" as="geometry">
+          <mxGeometry x="218" y="58" width="210" height="264" as="geometry">
             <mxRectangle x="213" y="130" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--1" value="+ id: int&#xa;+ past_orders: Dict[str, int]&#xa;+ recommendations: Dict[str, float]" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--1" value="+ id: int&#xa;+ past_orders: Dict[str, int]&#xa;+ recommendations: Dict[str, float]" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=13;spacingTop=1;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
           <mxGeometry y="26" width="210" height="64" as="geometry" />
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--4" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
           <mxGeometry y="90" width="210" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--5" value="- __init__ (id: int, past_orders: &#xa;        Dict[str, int])&#xa;+ set_recommendations(&#xa;        recommendations: &#xa;        Dict[str, float]): int): None&#xa;+ get_id(): int&#xa;+ get_orders(): Dict[str, int]&#xa;+ get_recommendation(): &#xa;        Dict[str, float]" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
-          <mxGeometry y="98" width="210" height="153" as="geometry" />
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--5" value="^ - __init__ (id: int, past_orders: &#xa;        Dict[str, int])&#xa;+ set_recommendations(&#xa;        recommendations: &#xa;        Dict[str, float]): None&#xa;+ get_id(): int&#xa;+ get_orders(): Dict[str, int]&#xa;+ get_recommendation(): &#xa;        Dict[str, float]" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=13;spacingTop=1;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+          <mxGeometry y="98" width="210" height="166" as="geometry" />
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--13" value="CachedData" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;shadow=0;strokeWidth=1;strokeColor=#666666;fontColor=#333333;fontSize=13;fillColor=#CCCCCC;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="218" y="339" width="210" height="160" as="geometry">
+          <mxGeometry x="218" y="339" width="210" height="168" as="geometry">
             <mxRectangle x="330" y="360" width="170" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -41,22 +41,22 @@
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--15" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--13" vertex="1">
           <mxGeometry y="70" width="210" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="FY6bye2SpyNX19oZSb27-1" value="- __init__(file_path: str, &lt;br style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; sim_matrix: DataFrame)&lt;br style=&quot;font-size: 13px;&quot;&gt;- _read_sim_matrix(): DataFrame&lt;br style=&quot;font-size: 13px;&quot;&gt;+ get_sim_matrix(): DataFrame" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;spacingLeft=4;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--13" vertex="1">
-          <mxGeometry y="78" width="210" height="70" as="geometry" />
+        <mxCell id="FY6bye2SpyNX19oZSb27-1" value="&lt;p style=&quot;line-height: 120%&quot;&gt;- __init__(file_path: str, &lt;br style=&quot;font-size: 13px&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; sim_matrix: DataFrame)&lt;br style=&quot;font-size: 13px&quot;&gt;- _read_sim_matrix(): DataFrame&lt;br style=&quot;font-size: 13px&quot;&gt;+ get_sim_matrix(): DataFrame&lt;/p&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;spacingLeft=4;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--13" vertex="1">
+          <mxGeometry y="78" width="210" height="90" as="geometry" />
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--17" value="Recommender" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;shadow=0;strokeWidth=1;strokeColor=#666666;fontColor=#333333;fontSize=13;fillColor=#CCCCCC;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="480" y="126" width="270" height="318" as="geometry">
+          <mxGeometry x="480" y="126" width="252" height="307" as="geometry">
             <mxRectangle x="480" y="180" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--22" value="- _data: CachedData&#xa;- _user: User&#xa;- _orderDF: DataFrame&#xa;- _recommender_df: DataFrame&#xa;- _recommended_products: Dict" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;shadow=0;html=0;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--17" vertex="1">
-          <mxGeometry y="26" width="270" height="84" as="geometry" />
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--22" value="- _data: CachedData&#xa;- _user: User&#xa;- _order_df: DataFrame&#xa;- _recommender_df: DataFrame" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;shadow=0;html=0;fontSize=13;spacingTop=1;" parent="zkfFHV4jXpPFQw0GAbJ--17" vertex="1">
+          <mxGeometry y="26" width="252" height="75" as="geometry" />
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--23" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--17" vertex="1">
-          <mxGeometry y="110" width="270" height="8" as="geometry" />
+          <mxGeometry y="101" width="252" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--24" value="- __init__(data: CachedData, user: User, &#xa;       recommender_df: DataFrame, &#xa;       recommended_products: Dict[str, int]))&#xa;- _set_recommender_df(): None&#xa;- _set_recommended_products(&#xa;        number_options: int): None&#xa;- _remove_already_bought(): None&#xa;- _remove_duplicates(): None&#xa;+ get_recommendation(number_options&#xa;        : int): Dict[str, int]&#xa;+ set_user_recommendation(&#xa;        number_options: int): None" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;spacingTop=1;spacing=2;fontSize=13;" parent="zkfFHV4jXpPFQw0GAbJ--17" vertex="1">
-          <mxGeometry y="118" width="270" height="200" as="geometry" />
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--24" value="- __init__(data: CachedData, user: User, &#xa;       recommender_df: DataFrame)&#xa;- _set_recommender_df(): None&#xa;- _create_recommendation_dict(&#xa;        number_options: int): Dict[str, float]&#xa;- _remove_already_bought(): None&#xa;- _remove_duplicates(): None&#xa;+ get_recommendation(number_options&#xa;        : int): Dict[str, float]&#xa;+ set_user_recommendation(&#xa;        number_options: int): None" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;spacingTop=1;spacing=2;fontSize=13;horizontal=1;" parent="zkfFHV4jXpPFQw0GAbJ--17" vertex="1">
+          <mxGeometry y="109" width="252" height="198" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
