@@ -11,6 +11,10 @@ COPY requirements.txt .
 COPY README.md .
 RUN python3.7 -m pip install --upgrade pip && python3.7 -m pip install . && python3.7 -m pip install -r requirements.txt
 
+# add evaluation and tests (not necessary in production)
+ADD scripts /home/app/scripts
+ADD test /home/app/test
+
 # run console script for data prep
 RUN prep
 
