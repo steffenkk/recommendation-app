@@ -1,5 +1,6 @@
-import pytest
+# test_user.py
 
+import pytest
 from src.user import User
 
 
