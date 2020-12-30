@@ -43,7 +43,7 @@ def extract_model_input(
 def predict(user_id: int, orders: dict, sim_matrix: pd.DataFrame, number_options: int):
     """ input the model with given params and retrieve a product recommendation """
     data = CachedData(sim_matrix=sim_matrix)
-    user = User(id=user_id, orders=orders)
+    user = User(id=user_id, past_orders=orders)
     recommender = Recommender(data=data, user=user)
     return recommender.get_recommendation(number_options)
 
@@ -99,6 +99,8 @@ def process(similiarity_measure: str, number_options: int, min_orders: int, **kw
         f"\n Model Parameters are similiarity_measure: {similiarity_measure}, "
         + f"number_options: {str(number_options)}, min_orders: {str(min_orders)}"
     )
+    for k, v in kwargs.items():
+        print(f"Additional Param: {str(k)} is {str(v)}.")
     print("AVG: Precision is: " + str(round(avg_precision, 3)))
     print("AVG: Recall is: " + str(round(avg_recall, 3)))
     print(f"Test results for {str(len(results))} predictions")
